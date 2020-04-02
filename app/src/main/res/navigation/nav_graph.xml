@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeScreen">
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="com.example.quiz.HomeScreen"
+        android:label="HomeScreen"
+        tools:layout="@layout/home_screen" >
+        <action
+            android:id="@+id/action_homeScreen_to_normalGame"
+            app:destination="@id/normalGame" />
+        <action
+            android:id="@+id/action_homeScreen_to_scoreScreen"
+            app:popEnterAnim="@anim/fragment_fast_out_extra_slow_in"
+            app:destination="@id/scoreScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/normalGame"
+        android:name="com.example.quiz.NormalGame"
+        android:label="normal_game"
+        tools:layout="@layout/normal_game" >
+        <action
+            android:id="@+id/action_normalGame_to_gameOver"
+            app:destination="@id/gameOver" />
+        <argument
+            android:name="difficulty"
+            app:argType="string"
+            android:defaultValue="default"/>
+    </fragment>
+    <fragment
+        android:id="@+id/gameOver"
+        android:name="com.example.quiz.GameOver"
+        android:label="GameOver"
+        tools:layout="@layout/game_over" >
+        <action
+            android:id="@+id/action_gameOver_to_homeScreen2"
+            app:destination="@id/homeScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scoreScreen"
+        android:name="com.example.quiz.ScoreScreen"
+        android:label="score_screen"
+        tools:layout="@layout/score_screen" >
+        <action
+            android:id="@+id/action_scoreScreen_to_homeScreen"
+            app:destination="@id/homeScreen" />
+    </fragment>
+</navigation>
