@@ -17,8 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 public class HomeScreen extends Fragment {
-    Button btn_normal, btn_lunatic;
-    TextView tv_loading;
+    Button btn_normal, btn_lunatic, btn_read_files;
+    TextView tv_loading, tv_normal_high_score, tv_lunatic_high_score;
     NormalGame normalGame = new NormalGame();
     private SoundPlayer sp;
     MediaPlayer mp;
@@ -41,20 +41,36 @@ public class HomeScreen extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         mainActivity = ((MainActivity)getActivity());
         difficulty = mainActivity.getDifficultyMainActivity();
-//        HomeScreen myFragment = (HomeScreen) getFragmentManager().findFragmentById(R.id.homeScreen);
-        HomeScreen myFragment = (HomeScreen) getChildFragmentManager().findFragmentByTag("HOME_SCREEN_REAL");
-        if (myFragment != null) {
-            Log.d("MyFragment", "Here i am");
-            mainActivity.setHomeScreen(myFragment);
-        } else {
-            Log.d("MyFragment", "Inside Else");
-        }
+//        FragmentManager fm = getFragmentManager();
+//        HomeScreen myFragment = (HomeScreen) fm.findFragmentByTag("HOME_SCREEN_REAL");
+//            FragmentManager fm = getChildFragmentManager();
+//            HomeScreen homeFragment = (HomeScreen) fm.findFragmentByTag("HOME_SCREEN_REAL");
+//            HomeScreen myFragment = (HomeScreen) getFragmentManager().findFragmentByTag("HOME_SCREEN_REAL");
+//        HomeScreen myFragment = (HomeScreen) getChildFragmentManager().findFragmentByTag("HOME_SCREEN_REAL");
+//        HomeScreen myFragment = (HomeScreen) fm.findFragmentById(R.id.homeScreen);
+//            HomeScreen homeFragment = (HomeScreen) getSupportFragmentManager().findFragmentByTag("HOME_SCREEN_REAL");
+//            HomeScreen homeFragment = (HomeScreen) fragMgr.findFragmentByTag("HOME_SCREEN_REAL");
+//            HomeScreen homeFragment = (HomeScreen) fragMgr.findFragmentById(R.id.homeScreen);
+//            Fragment homeFragment = fragMgr.findFragmentByTag("HOME_SCREEN_REAL");
+//        if (myFragment != null) {
+//            Log.d("MyFragment", "Here i am");
+//            mainActivity.setHomeScreen(myFragment);
+//        } else {
+//            Log.d("MyFragment", "Inside Else");
+//        }
         super.onViewCreated(view, savedInstanceState);
+        btn_read_files = view.findViewById(R.id.btn_read_files);
         btn_normal = view.findViewById(R.id.btn_normal);
         btn_lunatic = view.findViewById(R.id.btn_lunatic);
         btn_normal.setVisibility(View.INVISIBLE);
         btn_lunatic.setVisibility(View.INVISIBLE);
         tv_loading = view.findViewById(R.id.tv_loading);
+        tv_normal_high_score = view.findViewById(R.id.tv_normal_high_score);
+        tv_lunatic_high_score = view.findViewById(R.id.tv_lunatic_high_score);
+        tv_normal_high_score.setVisibility(View.INVISIBLE);
+        tv_lunatic_high_score.setVisibility(View.INVISIBLE);
+
+        mainActivity.readFiles();
 
         view.findViewById(R.id.btn_home_to_score).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +86,14 @@ public class HomeScreen extends Fragment {
         if(difficulty == "lunatic"){
             webView.loadUrl("file:///android_asset/lunaticGifView.html");
         }
+
+
+        btn_read_files.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.readFiles();
+            }
+        });
 
         timer = new CountDownTimer(10000, 1000) {
             private boolean gameReady = false;
@@ -154,10 +178,11 @@ public class HomeScreen extends Fragment {
         });
     }
 
-//    public void updateScore(){
-//        tv_normal_high_score.setText(((MainActivity)getActivity()).getNormalScore());
-//        tv_normal_high_score.setVisibility(View.VISIBLE);
-//        tv_lunatic_high_score.setText(((MainActivity)getActivity()).getLunaticScore());
-//        tv_lunatic_high_score.setVisibility(View.VISIBLE);
-//    }
+    public void updateScore(){
+        Log.d("FileManager", "Inside update score");
+        tv_normal_high_score.setText(((MainActivity)getActivity()).getNormalScore());
+        tv_normal_high_score.setVisibility(View.VISIBLE);
+        tv_normal_high_score.setText(((MainActivity)getActivity()).getLunaticScore());
+        tv_lunatic_high_score.setVisibility(View.VISIBLE);
+    }
 }

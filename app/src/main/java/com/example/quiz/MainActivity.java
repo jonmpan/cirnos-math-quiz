@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -46,9 +49,11 @@ public class MainActivity extends AppCompatActivity {
     private String lunaticScore;
     public void setHomeScreen(HomeScreen homeScreen) { this.homeScreen = homeScreen; }
     private HomeScreen homeScreen;
+    private ContentMain contentMain;
     public String getDifficultyMainActivity() { return difficultyMainActivity; }
     public void setDifficultyMainActivity(String difficultyMainActivity) { this.difficultyMainActivity = difficultyMainActivity; }
     private String difficultyMainActivity = "normal";
+    private FragmentManager fragMgr = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +71,17 @@ public class MainActivity extends AppCompatActivity {
         mp.setLooping(true);
         setContentView(R.layout.activity_main);
 
-        // manually creaetee fragment... figure out how to set navcontroller
+        // manually create fragment... figure out how to set navController
 //        FragmentManager fragMgr = getSupportFragmentManager();
-//        FragmentTransaction fragTrans = fragMgr.beginTransaction();
+        FragmentTransaction fragTrans = fragMgr.beginTransaction();
+        contentMain = new ContentMain(); //my custom fragment
+        fragTrans.replace(android.R.id.content, contentMain, "CONTENT_MAIN");
+
 //        homeScreen = new HomeScreen(); //my custom fragment
-//        fragTrans.replace(android.R.id.content, homeScreen, "HOME_SCREEN_REAL");
-//        fragTrans.addToBackStack(null);
-//        fragTrans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//        fragTrans.commit();
+//        fragTrans.replace(android.R.id.content, homeScreen, "HOME_SCREEN");
+        fragTrans.addToBackStack(null);
+        fragTrans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        fragTrans.commit();
 
 //        val myNavHostFragment: NavHostFragment = my_nav_host_fragment as NavHostFragment
 //        val inflater = myNavHostFragment.navController.navInflater
@@ -111,6 +119,36 @@ public class MainActivity extends AppCompatActivity {
     public void readFiles() {
         try {
             Log.d("FileManager","Read Files");
+//            HomeScreen homeFragment = (HomeScreen) fragMgr.findFragmentByTag("HOME_SCREEN");
+            ContentMain contentMain = (ContentMain) fragMgr.findFragmentByTag("CONTENT_MAIN");
+            FragmentManager childFragmentManager = contentMain.getChildFragmentManager();
+            HomeScreen homeFragment = (HomeScreen) childFragmentManager.findFragmentById(R.id.homeScreen);
+            List<Fragment> fragments = childFragmentManager.getFragments();
+//            HomeScreen homeFragment = fragments.get(0);
+
+            if (contentMain != null) {
+                Log.d("FileManager", "CONTENT MAIN FRAGMENT FOUND!");
+            } else {
+                Log.d("FileManager", "CONTENT MAIN Fragment not found :(");
+            }
+            if (homeFragment != null) {
+                Log.d("FileManager", "HOME FRAGMENT FOUND!");
+            } else {
+                Log.d("FileManager", "HOME Fragment not found :(");
+            }
+            if (fragments != null) {
+                Log.d("FileManager", "FRAGMENTS FOUND!");
+            } else {
+                Log.d("FileManager", "Fragments not found :(");
+            }
+//            HomeScreen myFragment = (HomeScreen) getFragmentManager().findFragmentByTag("HOME_SCREEN_REAL");
+//        HomeScreen myFragment = (HomeScreen) getChildFragmentManager().findFragmentByTag("HOME_SCREEN_REAL");
+//        HomeScreen myFragment = (HomeScreen) getSupportFragmentManager().findFragmentByTag("HOME_SCREEN_REAL");
+//            HomeScreen homeFragment = (HomeScreen) getSupportFragmentManager().findFragmentByTag("HOME_SCREEN_REAL");
+//            HomeScreen homeFragment = (HomeScreen) fragMgr.findFragmentByTag("HOME_SCREEN_REAL");
+//            HomeScreen homeFragment = (HomeScreen) fragMgr.findFragmentById(R.id.homeScreen);
+//            Fragment homeFragment = fragMgr.findFragmentByTag("HOME_SCREEN_REAL");
+            Log.d("FileManager","Read Files2");
             FileInputStream fileInputStream = openFileInput("normal.txt");
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -145,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
                 lunaticScore = "0";
                 Log.d("FileManager","Lunatic inside else" + lunaticScore);
             }
+            Log.d("FileManager", "Right before update score");
+            homeScreen.updateScore();
         } catch (Exception e){
             normalScore = "0";
             lunaticScore = "0";
