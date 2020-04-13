@@ -272,7 +272,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/difficulty_button"
-        android:text="Read Files"
+        android:text="Debug Button"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

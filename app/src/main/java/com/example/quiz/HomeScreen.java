@@ -91,7 +91,7 @@ public class HomeScreen extends Fragment {
         btn_read_files.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.readFiles();
+                DumbQuestion.generateDumbQuestion("normal");
             }
         });
 

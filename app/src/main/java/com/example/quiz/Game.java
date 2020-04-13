@@ -56,13 +56,17 @@ public class Game {
         Random r = new Random();
 //        int result = r.nextInt(dumbQuestions.size());
         int result = r.nextInt(range);
-        if(result != lastRandom){
-            lastRandom = result;
-            dumbQuestion = dumbQuestions.get(result);
-            Log.d("RANDOM","DONE");
-        } else {
-            Log.d("RANDOM","AGAIN");
-            makeDumbQuestion();
+        if(Math.random()>0.5){
+            dumbQuestion = DumbQuestion.generateDumbQuestion(difficulty);
+        } else{
+            if(result != lastRandom){
+                lastRandom = result;
+                dumbQuestion = dumbQuestions.get(result);
+                Log.d("RANDOM","DONE");
+            } else {
+                Log.d("RANDOM","AGAIN");
+                makeDumbQuestion();
+            }
         }
 //        Log.d("DumbQuestion in Game", "Question is "+dq.getQuestion());
     }

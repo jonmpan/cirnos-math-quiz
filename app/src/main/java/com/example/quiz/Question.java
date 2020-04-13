@@ -51,7 +51,6 @@ public class Question {
         Log.d("Question", "line 51");
         return array;
     }
-
     // getters and setters
 
     public int getFirstNumber() {

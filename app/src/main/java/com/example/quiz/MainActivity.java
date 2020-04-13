@@ -89,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
 //        myNavHostFragment.navController.graph = graph
 //        Fragment navi = fragMgr.getPrimaryNavigationFragment();
 //        fragTrans.setPrimaryNavigationFragment(navi);
-
+        for(int i = 0; i < 10; i++){
+            DumbQuestion.generateDumbQuestion("lunatic");
+        }
         mQueue = Volley.newRequestQueue(this);
         getLifecycle().addObserver(new BackgroundServices());
         readFiles();
