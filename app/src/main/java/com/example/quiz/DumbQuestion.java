@@ -30,8 +30,8 @@ public class DumbQuestion {
         String tempCorrectAnswer;
 
 //        questionType = rng.nextInt(4);
-//        questionType = 0;
-        questionType = 1;
+        questionType = 0;
+//        questionType = 1;
         Log.d("GenerateDumbQuestion", "questionType="+questionType);
         if(difficulty == "normal"){
             numCount = rng.nextInt(2)+2;
