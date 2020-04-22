@@ -6,13 +6,13 @@
     app:startDestination="@id/homeScreen">
     <fragment
         android:id="@+id/contentMain"
-        android:name="com.example.quiz.ContentMain"
+        android:name="com.jonmpan.quiz.ContentMain"
         android:label="HomeScreen"
         tools:layout="@layout/content_main" >
     </fragment>
     <fragment
         android:id="@+id/homeScreen"
-        android:name="com.example.quiz.HomeScreen"
+        android:name="com.jonmpan.quiz.HomeScreen"
         android:label="HomeScreen"
         tools:layout="@layout/home_screen" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/normalGame"
-        android:name="com.example.quiz.NormalGame"
+        android:name="com.jonmpan.quiz.NormalGame"
         android:label="normal_game"
         tools:layout="@layout/normal_game" >
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameOver"
-        android:name="com.example.quiz.GameOver"
+        android:name="com.jonmpan.quiz.GameOver"
         android:label="GameOver"
         tools:layout="@layout/game_over" >
         <action
@@ -48,7 +48,7 @@
 
     <fragment
         android:id="@+id/scoreScreen"
-        android:name="com.example.quiz.ScoreScreen"
+        android:name="com.jonmpan.quiz.ScoreScreen"
         android:label="score_screen"
         tools:layout="@layout/score_screen" >
         <action

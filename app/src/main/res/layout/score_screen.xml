@@ -11,32 +11,62 @@
         android:id="@+id/tv_normal_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Normal Score"
-        app:layout_constraintBottom_toTopOf="@+id/tv_lunatic_score"
+        android:text="0 points"
+        android:textColor="#1500ff"
+        android:textSize="32dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tv_normal_high_score_label" />
 
     <TextView
         android:id="@+id/tv_lunatic_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lunatic Score"
+        android:text="0 points"
+        android:textColor="#1500ff"
+        android:textSize="32dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tv_lunatic_high_score_label" />
 
     <Button
         android:id="@+id/btn_back_to_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Back"
+        android:layout_marginBottom="36dp"
         android:background="@drawable/difficulty_button"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_normal_high_score_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Normal High Score"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_lunatic_score" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="36dp"
+        android:textColor="#1500ff"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:background="#80FFFFFF" />
+
+    <TextView
+        android:id="@+id/tv_lunatic_high_score_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lunatic High Score"
+        android:layout_marginTop="32dp"
+        android:textColor="#1500ff"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_normal_score"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
